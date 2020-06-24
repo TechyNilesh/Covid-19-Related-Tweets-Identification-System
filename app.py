@@ -24,7 +24,7 @@ def cleanTxt(text):
     #Word Lemmatization
     #text = WordNetLemmatizer().lemmatize(text,"v")
     #joining text
-    text = ' '.join(filtered_sentence)
+    #text = ' '.join(filtered_sentence)
     return text
 
 #predication Function
