@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 import pickle
 import re
 import ftfy
-import nltkmodules
+
 
 app = Flask(__name__)
 
