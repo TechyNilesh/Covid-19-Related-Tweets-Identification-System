@@ -18,11 +18,11 @@ def cleanTxt(text):
     text = ftfy.fix_text(text) #fix weirdly encoded texts 
     text = text.lower() # all to lower latter
     #stop words
-    #stop_words = set(stopwords.words('english'))
-    #word_tokens = nltk.word_tokenize(text) 
-    #filtered_sentence = [w for w in word_tokens if not w in stop_words]
+    stop_words = set(stopwords.words('english'))
+    word_tokens = nltk.word_tokenize(text) 
+    filtered_sentence = [w for w in word_tokens if not w in stop_words]
     #Word Lemmatization
-    #text = WordNetLemmatizer().lemmatize(text,"v")
+    text = WordNetLemmatizer().lemmatize(text,"v")
     #joining text
     text = ' '.join(filtered_sentence)
     return text
