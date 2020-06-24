@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='spam-favicon.ico') }}">
+    <!-- Chart.js -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    <!-- Boostrap v5 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <!-- Boostrap v5 JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+
+    <title>COVID-19 Tweet Classification</title>
+    <style>
+        body {
+            background-image: url('/static/backround.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container d-flex justify-content-center mt-3 p-3">
+        <!-- Content here -->
+        <div class="card">
+            <div class="card" style="width: 32rem;">
+                <img src="/static/covid19tweets.jpeg" class="card-img-top" alt="covid_19_tweets">
+                <div class="card-header bg-primary bg-gradient text-white font-weight-bolder">
+                    <h4>COVID-19 TWEET CLASSIFICATION SYSTEM</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-center">The objective of this Machine Learning model is to assess if a
+                        Twitter post is about COVID-19 or not.</p>
+                    <form class="text-center" action="{{ url_for('predict') }}" method="POST">
+                        <div class="input-group">
+                            <span class="input-group-text">Enter Text</span>
+                            {% if text %}
+                            <textarea class="form-control" name="text" placeholder="{{ text }}"
+                                aria-label="With textarea"
+                                style="margin-top: 0px; margin-bottom: 0px; height: 104px;"></textarea>
+                            {% else %}
+                            <textarea class="form-control" name="text" placeholder="minimum of 50+ characters required"
+                                aria-label="With textarea"
+                                style="margin-top: 0px; margin-bottom: 0px; height: 104px;"></textarea>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Identify Text</button>
+                    </form>
+                </div>
+            </div>
+            <div class="card-footer text-muted text-center">
+                Design & Developed By Nilesh Verma
+                <a href="https://www.linkedin.com/in/techynilesh" class="link-primary p-1">LinkedIn</a>
+                <a href="https://github.com/TechyNilesh/" class="link-secondary">GitHub</a>
+            </div>
+        </div>
+        <!-- <figure class="figure">
+      <img src="/static/covid19tweets.jpeg" class="ml-5 figure-img rounded float-right border border-white" style="width: 400px; height:400px;"  alt="...">
+      <figcaption class="figure-caption text-center text-white">Predication Probability</figcaption>
+    </figure> -->
+        <div class="ml-5 text-center">
+            <h2 class="bg-white rounded border-primary border-5">Predication Probability</h2>
+            <canvas id="chart" width="600" height="400" class="bg-white rounded border-primary"></canvas>
+            <script>
+                // bar chart data
+                var barData = {
+                    labels: [
+                        {% for item in labels %}
+                "{{ item }}",
+                    {% endfor %}
+      ],
+
+                datasets: [{
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    data: [
+                        {% for item in values %}
+                 "{{ item }}",
+                {% endfor %}
+                ]
+            }
+          ]
+        }
+
+                // get bar chart canvas
+                var mychart = document.getElementById("chart").getContext("2d");
+
+                steps = 10
+                max = 100
+
+                // draw bar chart
+                new Chart(mychart).Bar(barData, {
+                    scaleOverride: true,
+                    scaleSteps: steps,
+                    scaleStepWidth: Math.ceil(max / steps),
+                    scaleStartValue: 0,
+                    scaleShowVerticalLines: true,
+                    scaleShowGridLines: true,
+                    barShowStroke: true,
+                    scaleShowLabels: true
+                }
+                );
+
+            </script>
+            <div class="card bg-light">
+                <div class="card-body ">
+                    <h6>Some Example Tweets</h6>
+                    <div class="alert alert-danger" role="alert">
+                        Why is explained in the video take a look
+                    </div>
+                    <div class="alert alert-success" role="alert">
+                        Ed Davey fasting for Ramadan No contest
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
