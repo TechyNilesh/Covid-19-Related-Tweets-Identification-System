@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content='maximum-scale=1.0, initial-scale=1.0, width=device-width' name='viewport'>
     <link rel="shortcut icon" href="{{ url_for('static', filename='spam-favicon.ico') }}">
     <!-- Chart.js -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <div class="container d-flex justify-content-center mt-3 p-3">
+    <div class="container-fluid d-flex justify-content-center mt-3 p-3">
         <!-- Content here -->
         <div class="card">
             <div class="card" style="width: 32rem;">
@@ -58,7 +58,7 @@
             <div class="card-footer text-muted text-center">
                 Design & Developed By Nilesh Verma
                 <a href="https://www.linkedin.com/in/techynilesh" class="link-primary p-1">LinkedIn</a>
-                <a href="https://github.com/TechyNilesh/Covid-19-Related-Tweets-Identification-System" class="link-secondary">GitHub</a>
+                <a href="https://github.com/TechyNilesh/" class="link-secondary">GitHub</a>
             </div>
         </div>
         <!-- <figure class="figure">
@@ -113,11 +113,11 @@
             <div class="card bg-light">
                 <div class="card-body ">
                     <h6>Some Example Tweets</h6>
-                    <div class="alert alert-danger" role="alert">
-                        Why is explained in the video take a look
+                    <div class="alert alert-primary" role="alert">
+                        <b>Polarity:</b> {{pol}} <b>Subjectivity:</b> {{sub}}
                     </div>
-                    <div class="alert alert-success" role="alert">
-                        Ed Davey fasting for Ramadan No contest
+                    <div class="alert alert-secondary" role="alert">
+                        <b>Sentiment:</b> {{sentiment}}
                     </div>
 
                 </div>
